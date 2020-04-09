@@ -1,0 +1,60 @@
+let p1=0;
+let p2="x";
+let cp;
+let game=0;
+document.getElementById('l1c1').addEventListener("click",function(){
+    document.getElementById('l1c1').innerText=cp;
+})
+document.getElementById('l1c2').addEventListener("click",function(){
+    document.getElementById('l1c2').innerText=cp;
+})
+document.getElementById('l1c3').addEventListener("click",function(){
+    document.getElementById('l1c3').innerText=cp;
+})
+document.getElementById('l2c1').addEventListener("click",function(){
+    document.getElementById('l2c1').innerText=cp;
+})
+document.getElementById('l2c2').addEventListener("click",function(){
+    document.getElementById('l2c2').innerText=cp;
+})
+document.getElementById('l2c3').addEventListener("click",function(){
+    document.getElementById('l2c3').innerText=cp;
+})
+document.getElementById('l3c1').addEventListener("click",function(){
+    document.getElementById('l3c1').innerText=cp;
+})
+document.getElementById('l3c2').addEventListener("click",function(){
+    document.getElementById('l3c2').innerText=cp;
+})
+document.getElementById('l3c3').addEventListener("click",function(){
+    document.getElementById('l3c3').innerText=cp;
+})
+document.getElementById('p1').addEventListener('click',function(){
+    cp="X";
+})
+document.getElementById('p2').addEventListener('click',function(){
+    cp="O";
+})
+xxxx{
+    cp=p1;
+    if((document.getElementById('l1c1').innerText===document.getElementById('l1c2').innerText)&(document.getElementById('l1c2').innerText===document.getElementById('l1c3').innerText)){
+        if(document.getElementById('l1c1')==="X"){
+            document.getElementById('wp1').innerText="Castigator";
+        break;}
+            else{document.getElementById('wp2').innerText="Castigator";
+        break;}
+    }
+    if((document.getElementById('l2c1').innerText===document.getElementById('l2c2').innerText)&(document.getElementById('l2c2').innerText===document.getElementById('l2c3').innerText)){
+        if(document.getElementById('l2c1')==="X"){
+            document.getElementById('wp1').innerText="Castigator";
+        break;}
+            else{document.getElementById('wp2').innerText="Castigator";
+        break;}
+    if((document.getElementById('l3c1').innerText===document.getElementById('l3c2').innerText)&(document.getElementById('l3c2').innerText===document.getElementById('l3c3').innerText)){
+        if(document.getElementById('l3c1')==="X"){
+            document.getElementById('wp1').innerText="Castigator";
+        break;}
+            else{document.getElementById('wp2').innerText="Castigator";
+        break;}
+    
+}

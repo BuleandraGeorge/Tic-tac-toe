@@ -1,0 +1,12 @@
+table{
+    width:300px;
+    height: 300px;
+}
+#l1c2,#l2c2,#l3c2{
+    border-left:1px solid black;
+    border-right:1px solid black;
+}
+#l2c1,#l2c2,#l2c3{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
