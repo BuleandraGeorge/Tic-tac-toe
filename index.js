@@ -34,7 +34,7 @@ function gsStatus(){
                     alert("Game is over, Press Restart to play again");
                     }
                     else{
-                            alert("Casuta e deja completata,va rog puneti-va ochelarii si alegeti o casuta goala");
+                            alert("Casuta e deja completata, alegeti o casuta goala");
                         }
 }
 // test if is already a caracter placed in the square     
