@@ -1,0 +1,46 @@
+body{
+    color:white;
+    background-color:black;
+}
+#table{
+    width:95vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow:inset 0px 0px 5px 0px blue;
+}
+ #l1, #l2,#l3{
+    height:33%;
+    width:inherit;
+    display: flex;
+    flex-direction: row;
+}
+.perfect-square{
+    width:33%;
+    height:75%;
+    padding-top: 10%;
+}
+#l2{
+   
+    box-shadow:inset 0px 0px 5px 0px blue;
+}
+#l1c2,#l2c2,#l3c2{
+    box-shadow:inset 0px 0px 5px 0px blue;
+}
+#table{
+    text-align: center;
+    font-size: 60px;
+    
+}
+.player2-view{
+-webkit-transform:rotate(-180deg);
+-moz-transform:rotate(-180deg);
+-o-transform:rotate(-180deg);
+transform:rotate(-180deg);
+ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2); 
+}
+#score-board{
+    margin-bottom: 20px;
+}
