@@ -159,7 +159,6 @@ function eSpace(element){
     }
     else {return true;}
 }
-
 function statusGame()
 {
         document.getElementById('l1c1').addEventListener("click",
@@ -290,4 +289,15 @@ document.getElementById('l3c3').addEventListener("click",function(){
 });
 }
 statusGame();
-
+document.getElementById("reset").addEventListener('click',function reset(){
+    document.getElementById('l1c1').innerHTML=null;
+    document.getElementById('l1c2').innerHTML=null;
+    document.getElementById('l1c3').innerHTML=null;
+    document.getElementById('l2c1').innerHTML=null;
+    document.getElementById('l2c2').innerHTML=null;
+    document.getElementById('l2c3').innerHTML=null;
+    document.getElementById('l3c1').innerHTML=null;
+    document.getElementById('l3c2').innerHTML=null;
+    document.getElementById('l3c3').innerHTML=null;
+    gstatus=0;
+});
