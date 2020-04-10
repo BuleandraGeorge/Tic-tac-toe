@@ -1,14 +1,16 @@
 body{
-    color:white;
-    background-color:black;
+    color:black;
+    background-image:url("bg.jpg");
+    background-position: center;
+    background-size: cover;
 }
 #table{
-    width:95vw;
-    height: 50vh;
+    width:93vw;
+    height: 45vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    box-shadow:inset 0px 0px 5px 0px blue;
+    box-shadow:inset 0px 0px 5px 0px black;
 }
  #l1, #l2,#l3{
     height:33%;
@@ -18,15 +20,15 @@ body{
 }
 .perfect-square{
     width:33%;
-    height:75%;
-    padding-top: 10%;
+    height:83%;
+    padding-top: 5%;
 }
 #l2{
    
-    box-shadow:inset 0px 0px 5px 0px blue;
+    box-shadow:inset 0px 0px 5px 0px black;
 }
 #l1c2,#l2c2,#l3c2{
-    box-shadow:inset 0px 0px 5px 0px blue;
+    box-shadow:inset 0px 0px 5px 0px black;
 }
 #table{
     text-align: center;
@@ -40,7 +42,29 @@ body{
 transform:rotate(-180deg);
 ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
 filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2); 
+text-align: center;
+display:none;
 }
 #score-board{
     margin-bottom: 20px;
+    text-align: center;
+}
+@media (min-width:1024px){
+    .player2-view{
+        display: none;
+    }
+    #score-board{
+    margin-bottom: 50px;
+    }
+    #table{
+    width:40vw;
+    height: 50vh;
+    margin-left:30vw
+    }
+    .perfect-square{
+    width:33%;
+    height:96%;
+    padding-top: 1%;
+    }
+
 }
