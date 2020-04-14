@@ -15,15 +15,17 @@ function reset(){
     document.getElementById('l3c3').innerHTML=null;
     gstatus=0;
 };
-document.getElementById("pg-button").addEventListener("click", function()
-    {
-    reset();
-    document.getElementById("modal-overlay").setAttribute("style","display:none;");
-    });
-document.getElementById("sb-button").addEventListener("click", function()
-    {
-    document.getElementById("modal-overlay").setAttribute("style","display:none;");
-    });
+document.getElementById("pg-button").addEventListener('click',
+    function()
+        {
+            reset();
+            document.getElementById("modal-overlay").setAttribute("style","display:none;");
+        });
+document.getElementById("sb-button").addEventListener('click', 
+    function()
+        {
+            document.getElementById("modal-overlay").setAttribute("style","display:none;");
+        });
 function p1Won(){
     p1++;
     gstatus=1;
