@@ -3,17 +3,40 @@ let p1=0;
 let p2=0;
 let gstatus = 0; // 1 for finished, 0 for in progress
 //switch the player
+function reset(){
+    document.getElementById('l1c1').innerHTML=null;
+    document.getElementById('l1c2').innerHTML=null;
+    document.getElementById('l1c3').innerHTML=null;
+    document.getElementById('l2c1').innerHTML=null;
+    document.getElementById('l2c2').innerHTML=null;
+    document.getElementById('l2c3').innerHTML=null;
+    document.getElementById('l3c1').innerHTML=null;
+    document.getElementById('l3c2').innerHTML=null;
+    document.getElementById('l3c3').innerHTML=null;
+    gstatus=0;
+};
+document.getElementById("pg-button").addEventListener("click", function()
+    {
+    reset();
+    document.getElementById("modal-overlay").setAttribute("style","display:none;");
+    });
+document.getElementById("sb-button").addEventListener("click", function()
+    {
+    document.getElementById("modal-overlay").setAttribute("style","display:none;");
+    });
 function p1Won(){
     p1++;
     gstatus=1;
-    document.getElementById('wp1').innerHTML=p1;
-    alert('Player One Has WON');
+    document.getElementById('wp1').innerHTML=p1; 
+    document.getElementById("modal-overlay").setAttribute("style","display:initial;");
+    document.getElementById('winner').innerText="Player One Has Won"; 
 };
 function p2Won(){
     p2++;
     gstatus=1;
     document.getElementById('wp2').innerHTML=p2;
-    alert('Player Two Has WON');
+    document.getElementById("modal-overlay").setAttribute("style","display:initial;");
+    document.getElementById('winner').innerText="Player Two Has Won";
 };
 
 function pSwitch(){
@@ -266,14 +289,5 @@ function gOver(){
         else gsStatus();
     });
 document.getElementById("reset").addEventListener('click',function(){
-    document.getElementById('l1c1').innerHTML=null;
-    document.getElementById('l1c2').innerHTML=null;
-    document.getElementById('l1c3').innerHTML=null;
-    document.getElementById('l2c1').innerHTML=null;
-    document.getElementById('l2c2').innerHTML=null;
-    document.getElementById('l2c3').innerHTML=null;
-    document.getElementById('l3c1').innerHTML=null;
-    document.getElementById('l3c2').innerHTML=null;
-    document.getElementById('l3c3').innerHTML=null;
-    gstatus=0;
+    reset();
 });
