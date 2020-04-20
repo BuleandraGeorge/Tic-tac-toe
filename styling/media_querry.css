@@ -1,0 +1,19 @@
+/*@media (min-width:1024px){
+    .player2-view{
+        display: none;
+    }
+    #score-board{
+    margin-bottom: 50px;
+    }
+    #table{
+    width:40vw;
+    height: 50vh;
+    margin-left:30vw
+    }
+    .perfect-square{
+    width:33%;
+    height:96%;
+    padding-top: 1%;
+    }
+
+}
