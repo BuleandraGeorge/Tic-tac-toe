@@ -4,7 +4,7 @@ body{
     font-family: "Quicksand";
 }
 .landing-modal-overlay{
-    background-color: whitesmoke;
+    background-color:whitesmoke;
     box-shadow: inset 0 0 20px  black;
 
 }
@@ -23,11 +23,25 @@ box-shadow: 0 0 20px  black;
     background-color: white;
     
 }
-#reset{
-    background-color: red;
-    border:1px solid grey;
-}
 .perfect-square{
     box-shadow:inset 0px 0px 5px 0px black;
 
+}
+.light-th-bg-color{
+    background-color: white;
+}
+.light-th-txt-color{
+    color:black;
+}
+.light-th-buttons-bg{
+}
+.light-th-overlay-bg{
+    background-color: white;
+
+}
+.light-th-modal-bg{
+
+}
+.light-th-font-family{
+    font-family: "Quicksand";
 }
