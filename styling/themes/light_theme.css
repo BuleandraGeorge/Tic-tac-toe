@@ -6,8 +6,8 @@
     font-family: "Quicksand";
 }
 .fade-effect:hover, .fade-effect:focus, .fade-effect:active{
-background-color: rgb(70, 205, 250);
-  color: white;
+    background-color: rgb(70, 205, 250);
+    color: white;
 }
 .bg-overlay{
     background-color: whitesmoke;
@@ -17,3 +17,20 @@ background-color: rgb(70, 205, 250);
 }
 #top,#bottom,#center{
     background-color: black;
+}
+#landing-modal-overlay{
+    box-shadow: inset 0 0 20px  black;
+}
+#landing-modal{
+    box-shadow: 0 0 20px  black;
+}
+#modal-nav li:hover{
+    border-radius: 5px;
+    text-shadow: 0 0 10px  black;
+}
+.perfect-square{
+     box-shadow:inset 0px 0px 1px 0px black;
+}
+#modal-overlay{
+     background-color:rgba(0,0,0,0.5);
+}

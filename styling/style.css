@@ -24,7 +24,6 @@ body{
     width:33%;
     height:33%;
     padding-top: 5%;
-    box-shadow:inset 0px 0px 1px 0px black;
 }
 
 /*-----------------Header Setting------------*/
@@ -69,7 +68,6 @@ display:none;
     position: fixed;
     top:0;
     left:0;
-    box-shadow: inset 0 0 20px  black;
     display:none;
 }
 #landing-modal{
@@ -81,11 +79,6 @@ height:70vh;
 width:35vw;
 border-radius: 5px;
 text-align: center;
-box-shadow: 0 0 20px  black;
-}
-#modal-nav li:hover{
-    border-radius: 5px;
-    text-shadow: 0 0 10px  black;
 }
 ul li {
      width:200px;
@@ -135,7 +128,6 @@ nav{
     width:100vw;
     height: 100vh;
     z-index: +1;
-    background-color:rgba(0,0,0,0.5);
 }
 #modal{
     position: absolute;
@@ -147,7 +139,6 @@ nav{
     transform:translate(-50%,-50%);
     border-radius: 5px;
     text-align: center;
-    
 }
 /*----------FADE EFFECT------*/
 .fade-effect{
