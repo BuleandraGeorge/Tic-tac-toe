@@ -1,13 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-
-.light-th-font-family{
+ 
+.bg-txt-font-family{
+    background-color: rgb(224, 234, 238);
+    color:black;
     font-family: "Quicksand";
 }
-.light-th-bg{
-    background-color: rgb(217, 238, 250);
-}
-
-.perfect-square:hover, .perfect-square:focus, .perfect-square:active{
-background-color: rgb(85, 191, 226);
+.fade-effect:hover, .fade-effect:focus, .fade-effect:active{
+background-color: rgb(70, 205, 250);
   color: white;
 }
+.bg-overlay{
+    background-color: whitesmoke;
+}
+.bg-modal{
+    background-color: white;
+}
+#top,#bottom,#center{
+    background-color: black;
