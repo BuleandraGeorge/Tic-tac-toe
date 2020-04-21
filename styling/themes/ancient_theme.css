@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 .bg-txt-font-family{
-    background-image: url("ancient.jpg");
+    background-image: url("Backgrounds/ancient.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     color:black;
