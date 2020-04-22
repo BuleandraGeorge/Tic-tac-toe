@@ -293,3 +293,25 @@ function gOver(){
 document.getElementById("reset").addEventListener('click',function(){
     reset();
 });
+
+document.getElementById("menu").addEventListener("click",function(){
+    document.getElementById("landing-modal-overlay").style.display="initial";
+});
+document.getElementById("closing-button").addEventListener("click",function(){
+    document.getElementById("landing-modal-overlay").style.display="none";
+});
+document.getElementById("light").addEventListener("click",function(){
+    document.getElementById("theme").setAttribute("href","styling/themes/light_theme.css");
+});
+document.getElementById("dark").addEventListener("click",function(){
+    document.getElementById("theme").setAttribute("href","styling/themes/dark_theme.css");
+});
+document.getElementById("ancient").addEventListener("click",function(){
+    document.getElementById("theme").setAttribute("href","styling/themes/ancient_theme.css");
+});
+document.getElementById("neon").addEventListener("click",function(){
+    document.getElementById("theme").setAttribute("href","styling/themes/neon_theme.css");
+});
+document.getElementById("jungle").addEventListener("click",function(){
+    document.getElementById("theme").setAttribute("href","styling/themes/jungle_theme.css");
+});
