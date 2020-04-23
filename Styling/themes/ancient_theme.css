@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Script&display=swap');
+.bg-txt-font-family{
+    background-image: url("https://i.pinimg.com/originals/83/17/83/831783ba0ce34bd5aea083a2bfa63233.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color:red;
+    font-family: "Nova Script";
+}
+
+#score-board{
+    background-color:rgb(255, 222, 37);
+    height:4vh;
+    padding:1vh 0;
+    color:rgb(238, 58, 13);
+    box-shadow: inset 0 0 5px 1px rgb(238, 58, 13);
+}
+#Name-HBB h1{
+    width:300px;
+
+}
+.fade-effect:hover, .fade-effect:focus, .fade-effect:active{
+    background-color:  rgb(238, 58, 13);
+    color: black;
+}
+.bg-overlay{
+    background-color: rgb(238, 58, 13);
+    color:black;
+}
+.bg-modal{
+    background-color: rgb(255, 222, 37);
+}
+#top,#bottom,#center{
+    background-color: rgb(255, 222, 37);
+}
+#landing-modal-overlay{
+    box-shadow: inset 0 0 20px  black;
+    
+}
+#landing-modal{
+    box-shadow: 0 0 20px  black;
+}
+ul li{
+    font-size:20px;
+}
+#theme-nav li{
+    font-size: 16px;
+}
+#modal-nav li:hover{
+    border-radius: 5px;
+    text-shadow: 0 0 10px  rgb(238, 58, 13);
+}
+.perfect-square{
+     box-shadow:0 0 10px 3px rgb(238, 58, 13);
+}
+#modal-overlay{
+     background-color:rgba(0,0,0,0.5);
+     color:black;
+}
+#modal{
+    background-color: rgb(255, 222, 37);
+    box-shadow:inset 0 0 10px 1px black;
+}
