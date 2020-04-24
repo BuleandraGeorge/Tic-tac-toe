@@ -1,29 +1,31 @@
-let cp="X";
+let currentPlayer="X";
 let p1=0;
 let p2=0;
 let gstatus = 0;
 var table=[[,,],[,,],[,,]];
-let tc=0;
+let moveCounter=0;
+const tableElem=document.getElementById("table");
+
 function pSwitch(){
-    if(cp=="X")
+    if(currentPlayer=="X")
         {
-            cp="O";
+            currentPlayer="O";
         }
             else   
-                if (cp=="O")
+                if (currentPlayer=="O")
                     {
-                        cp="X";
+                        currentPlayer="X";
                     }
 }
 function reset(){
     gstatus=0;
-    tc=0;
+    moveCounter=0;
     for (let i=1; i<=3;i++)
         {
         for(let j=1;j<=3;j++)
                 {
                 table[i-1][j-1]=null;
-                document.getElementById(`l${i}c${j}`).innerHTML=null;
+                document.getElementById(`${i}${j}`).innerHTML=null;
                 }
         }
 };
@@ -41,8 +43,8 @@ function p2Won(){
     document.getElementById("modal-overlay").setAttribute("style","display:initial;");
     document.getElementById('winner').innerText="Player Two Has Won";
 };
-function tiechecker(tc){
-            if(tc==9)
+function tiechecker(moveCounter){
+            if(moveCounter==9)
             {
                 document.getElementById("modal-overlay").setAttribute("style","display:initial;");
                 document.getElementById('winner').innerText="It's a tie my friend";
@@ -66,8 +68,7 @@ function gsStatus(){
 }
 //checks if the move is winner
 function gOver(){
-            tc++;
-            for(let i=0;i<3;i++)
+             for(let i=0;i<3;i++)
             {
              if((table[i][0]==table[i][1])&&(table[i][1]==table[i][2]))
                 {
@@ -113,9 +114,9 @@ function gOver(){
                                                         {
                                                     p2Won();  
                                                     }
-                                        }else tiechecker(tc);
+                                        }else tiechecker(moveCounter);
+                                    }
 
-             }
     }; 
 //Modal Buttons
 document.getElementById("pg-button").addEventListener('click',
@@ -130,122 +131,22 @@ document.getElementById("sb-button").addEventListener('click',
             document.getElementById("modal-overlay").setAttribute("style","display:none;");
         });   
 //Table Buttons
-document.getElementById('l1c1').addEventListener("click",
-        function()
-            {   
-                let element=table[0][0];
-                if((eSpace(element)==true)&&(gstatus==0))
-                    {   
-                        table[0][0]=cp;
-                        document.getElementById('l1c1').innerText=cp;
+tableElem.addEventListener('click',function(e){
+        let element=e.target.innerHTML;
+        if((eSpace(element)==true)&&(gstatus==0))
+                    {   e.target.innerHTML=currentPlayer;
+                        let currentCellId=e.target.id;
+                        table[currentCellId[0]][currentCellId[1]]=currentPlayer;
+                        moveCounter++;
                         pSwitch();
-                        gOver();
+                        if (moveCounter>4){
+                            gOver();
+                        }
                     }
                  else gsStatus();
-            });
-document.getElementById('l1c2').addEventListener("click",
-        function()
-            {
-                let element=table[0][1];
-                if((eSpace(element)==true)&&(gstatus==0))
-                    {
-                        table[0][1]=cp;
-                        document.getElementById('l1c2').innerText=cp;
-                        pSwitch();
-                        gOver();
-                    }
-                else gsStatus();
-            });
-document.getElementById('l1c3').addEventListener("click",
-        function(){ 
-                    let element=table[0][2];
-                    if((eSpace(element)==true)&&(gstatus==0))
-                    {
-                        document.getElementById('l1c3').innerText=cp;
-                        table[0][2]=cp;
-                        pSwitch();
-                        gOver();
-                        }
-                    else gsStatus();
-            });
-document.getElementById('l2c1').addEventListener("click",
-        function()
-        {
-            let element=table[1][0];
-            if((eSpace(element)==true)&&(gstatus==0))
-                {
-                document.getElementById('l2c1').innerText=cp;
-                table[1][0]=cp;
-                pSwitch();
-                gOver();
-                }
-            else gsStatus();
-        });
-document.getElementById('l2c2').addEventListener("click",
-        function()
-        {
-            let element=table[1][1];
-            if((eSpace(element)==true)&&(gstatus==0))
-            {
-                document.getElementById('l2c2').innerText=cp;
-                table[1][1]=cp;
-                pSwitch();
-                gOver();
-            }
-                else gsStatus();
-            });
-document.getElementById('l2c3').addEventListener("click",
-        function()
-        {
-            let element=table[1][2];
-            if((eSpace(element)==true)&&(gstatus==0))
-                {
-                document.getElementById('l2c3').innerText=cp;
-                table[1][2]=cp;
-                pSwitch();
-                gOver();
-                }
-        else gsStatus();
-        });
-document.getElementById('l3c1').addEventListener("click",
-    function()
-    {
-        let element=table[2][0];
-        if((eSpace(element)==true)&&(gstatus==0))
-            {
-            document.getElementById('l3c1').innerText=cp;
-            table[2][0]=cp;
-            pSwitch();
-            gOver();
-            }
-        else gsStatus();
-        });
-document.getElementById('l3c2').addEventListener("click",
-    function()
-    {
-        let element=table[2][1];
-        if((eSpace(element)==true)&&(gstatus==0))
-            {
-                document.getElementById('l3c2').innerText=cp;
-                table[2][1]=cp;
-                pSwitch();
-                gOver();
-            }
-        else gsStatus();
-    });
-document.getElementById('l3c3').addEventListener("click",
-    function()
-    {
-        let element=table[2][2];
-        if((eSpace(element)==true)&&(gstatus==0))
-        {
-            document.getElementById('l3c3').innerText=cp;
-            table[2][2]=cp;
-            pSwitch();
-            gOver();
-        }
-        else gsStatus();
-    });
+});
+ 
+
 document.getElementById("reset").addEventListener('click',function(){
     reset();
 });
