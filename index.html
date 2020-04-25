@@ -16,9 +16,9 @@
             <h1 id="landing-heading">TIC TAC TOE</h1>
             <nav>
                 <ul id="modal-nav">
-                    <li>Player vs Player</li>
-                    <li>Player vs PC</li>
-                    <li>Online</li>
+                    <li id="pvp">Player vs Player</li>
+                    <li id="pvpc">Player vs PC</li>
+                    <li id="online">Online</li>
                     <li id="change-theme">Change Theme
                         <ul id="theme-nav">
                             <li id="light">Light</li>
@@ -32,7 +32,7 @@
             </nav>
         </div>
     </div>
-    <header>
+    <header id="header">
         <div id="Name-HBB">
             <h1>TIC TAC TOE</h1>
             <div id="menu" class="hb-container fade-effect">
@@ -44,11 +44,12 @@
         <h2 id="theme-name">LIGHT</h2>
         <div id="score-board">
             <div id="p1">
-                <span  class="button fade-effect">P1 </span><span>Score:</span><span id="wp1">0</span>
+                <span id="player1"  class="button fade-effect">P1 </span><span>Score:</span><span id="wp1">0</span>
             </div>
-            <h5 id="reset" class="fade-effect button">RESTART</h5>
+            <h5 id="reset-table" class="fade-effect button">RESET TABLE</h5>
+            <h5 id="reset-scores" class="fade-effect button">RESET SCORES</h5>
             <div id="p2">
-                <span  class="button fade-effect">P2 </span><span>Score:</span><span id="wp2">0</span>
+                <span id="player2"  class="button fade-effect">P2 </span><span>Score:</span><span id="wp2">0</span>
             </div>
         </div>
     </header>

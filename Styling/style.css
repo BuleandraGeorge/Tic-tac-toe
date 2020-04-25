@@ -62,6 +62,9 @@ display:none;
      padding:4px 5px;
      border-radius: 2px;
  }
+ #closing-button{
+     display:none;
+ }
 /*------------Ladding Modal-----------------*/
 
 #landing-modal-overlay{
@@ -71,7 +74,6 @@ display:none;
     position: fixed;
     top:0;
     left:0;
-    display: none;
 }
 #landing-modal{
 position:absolute;
