@@ -22,9 +22,17 @@ function pSwitch(){
                         currentPlayer="X";
                     }
 }
-function reset(){
-    gameOver=0;
-    moveCounter=0;
+function resetGame(){
+    p1=0;
+    p2=0;
+    document.getElementById('wp1').innerHTML=0; 
+    document.getElementById('wp2').innerHTML=0; 
+    resetTable();
+    
+};
+function resetTable()
+{ gameOver=0;
+ moveCounter=0;
     for (let i=0; i<3;i++)
         {
         for(let j=0;j<3;j++)
@@ -135,7 +143,7 @@ function winnerCheck()
 document.getElementById("pg-button").addEventListener('click',
     function()
         {
-            reset();
+            resetTable();
             document.getElementById("modal-overlay").setAttribute("style","display:none;");
         });
 document.getElementById("sb-button").addEventListener('click', 
@@ -197,23 +205,23 @@ themeMenu.addEventListener("click",function(themeEvent){
     switch(choosenTheme){
         case 'light': document.getElementById("theme-name").innerHTML="LIGHT"; 
                       document.getElementById("theme").setAttribute("href","Styling/themes/light_theme.css"); 
-                      reset(); 
+                      resetTable(); 
                       break;
         case 'dark': document.getElementById("theme-name").innerHTML="DARK"; 
                      document.getElementById("theme").setAttribute("href","Styling/themes/dark_theme.css");
-                     reset(); 
+                     resetTable();  
                      break;
         case 'ancient': document.getElementById("theme-name").innerHTML="ANCIENT";
                         document.getElementById("theme").setAttribute("href","Styling/themes/ancient_theme.css");  
-                        reset(); 
+                        resetTable();  
                         break;
         case 'neon': document.getElementById("theme-name").innerHTML="NEON";
                      document.getElementById("theme").setAttribute("href","Styling/themes/neon_theme.css"); 
-                     reset(); 
+                     resetTable();  
                      break;
         case 'jungle': document.getElementById("theme-name").innerHTML="JUNGLE";
                        document.getElementById("theme").setAttribute("href","Styling/themes/jungle_theme.css"); 
-                       reset(); 
+                       resetTable();  
                        break;
     }
 })
@@ -221,12 +229,9 @@ themeMenu.addEventListener("click",function(themeEvent){
 headerAction.addEventListener('click',function(headerEvent){
     headerElement=headerEvent.target.id;
     switch(headerElement){
-        case 'reset-table':reset();
+        case 'reset-table':resetTable(); ;
                            break;
-        case 'reset-score': p1=0;
-                            p2=0;
-                            document.getElementById('wp1').innerHTML=p1; 
-                            document.getElementById('wp2').innerHTML=p2; 
+        case 'reset-scores': resetGame(); 
                             break;
         case 'menu': 
         case 'top': //the hamburger menu as you have seen is made out from 4 components, container, top, center and bottom
@@ -244,12 +249,12 @@ landingModal.addEventListener("click",function(landingModalEvent){
     optionModal=landingModalEvent.target.id;
     switch(optionModal){
         case 'pvp':document.getElementById("landing-modal-overlay").style.display="none";
-                   reset();
+                   resetGame();
                    computerStatus=false;
                    break;
         case 'pvpc':document.getElementById("landing-modal-overlay").style.display="none";
                     computerStatus=true;
-                    reset();
+                    resetGame();
                     break;
         case 'online': alert("Comming Soon");break;
         case 'closing-button': document.getElementById("landing-modal-overlay").style.display="none";
