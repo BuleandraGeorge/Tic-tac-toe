@@ -1,9 +1,11 @@
 let currentPlayer="X";
 let p1=0;
 let p2=0;
-let gameStatus=0;
+let gameOver=0;
 var table=[[,,],[,,],[,,]];
 let moveCounter=0;
+let computerMove=false;
+let computerStatus;
 const tableElem=document.getElementById("table");
 const themeMenu=document.getElementById("theme-nav");
 const landingModal=document.getElementById("landing-modal-overlay");
@@ -21,7 +23,7 @@ function pSwitch(){
                     }
 }
 function reset(){
-    gameStatus=0;
+    gameOver=0;
     moveCounter=0;
     for (let i=0; i<3;i++)
         {
@@ -34,26 +36,32 @@ function reset(){
 };
 function p1Won(){
     p1++;
-    gameStatus=1;
+    gameOver=1;
     document.getElementById('wp1').innerHTML=p1; 
     document.getElementById("modal-overlay").setAttribute("style","display:initial;");
-    document.getElementById('winner').innerText="Player One Has Won"; 
+    document.getElementById('winner').innerText="Player One Has Won";
+    computerMove=false;
+    return 1;
 };
 function p2Won(){
     p2++;
-    gameStatus=1;
+    gameOver=1;
     document.getElementById('wp2').innerHTML=p2;
     document.getElementById("modal-overlay").setAttribute("style","display:initial;");
     document.getElementById('winner').innerText="Player Two Has Won";
+    computerMove=false;
+    return -1; 
 };
-function tiechecker(moveCounter){
-            if(moveCounter==9)
-            {
+function tiechecker(){
+                computerMove=false;
                 document.getElementById("modal-overlay").setAttribute("style","display:initial;");
                 document.getElementById('winner').innerText="It's a tie my friend";
-            }else return null;
+                console.log(`Urmeaza computer ${computerMove} deoarece este egal`);
+                gameOver=1;
+                return 0;
         };
 function validSlot(element){
+
     if((element=="X")||(element)=="O")
     {
         return false;
@@ -61,7 +69,7 @@ function validSlot(element){
     else {return true;}
 }
 function gsStatus(){
-    if (gameStatus==1) 
+    if (gameOver==1) 
                     {
                     alert("Game is over, Press Restart to play again");
                     }
@@ -70,58 +78,59 @@ function gsStatus(){
                         }
 }
 //checks if the move is winner
-function winnerCheck(){
-                for(let i=0;i<3;i++)
-                {
-                if((table[i][0]==table[i][1])&&(table[i][1]==table[i][2]))
-                    {
-                        if(table[i][0]=="X")
+function winnerCheck()
+{       
+                 for(let i=0;i<3;i++)
+                        {
+                        if((table[i][0]==table[i][1])&&(table[i][1]==table[i][2]))
                             {
-                                p1Won();
-                            }
-                            else if (table[i][0]=="O")
-                                {
-                                    p2Won();
-                                }
-                    }else if ((table[0][i]==table[1][i])&&(table[1][i]==table[2][i]))
-                            {
-                                if(table[0][i]=="X")
+                                if(table[i][0]=="X")
                                     {
                                         p1Won();
                                     }
-                                    else if (table[0][i]=="O")
+                                    else if (table[i][0]=="O")
                                         {
-                                            p2Won();  
+                                            p2Won();
                                         }
-                            }else if(i==0)
+                            }else if ((table[0][i]==table[1][i])&&(table[1][i]==table[2][i]))
                                     {
-                                        if((table[i][i]==table[i+1][i+1])&&(table[i+1][i+1]==table[i+2][i+2]))
+                                        if(table[0][i]=="X")
                                             {
-                                                if(table[i][i]=="X")
-                                                        {
-                                                        p1Won();
-                                                        }               
-                                                    else if (table[i][i]=="O")
-                                                            {
-                                                        p2Won();  
-                                                        }
-                                            }else if((table[i][i+2]==table[i+1][i+1])&&(table[i+1][i+1]==table[i+2][i]))
-                                            {
-                                                if(table[i][i+2]=="X")
-                                                        {
-                                                        p1Won();
-                                                        }               
-                                                    else if (table[i][i+2]=="O")
-                                                            {
-                                                        p2Won();  
-                                                        }
+                                                p1Won();
                                             }
-                                    }
-            }
-            if(gameStatus!=1){
-                tiechecker(moveCounter);
-            }
-    }; 
+                                            else if (table[0][i]=="O")
+                                                {
+                                                    p2Won();  
+                                                }
+                                    }else if(i==0)
+                                            {
+                                                if((table[i][i]==table[i+1][i+1])&&(table[i+1][i+1]==table[i+2][i+2]))
+                                                    {
+                                                        if(table[i][i]=="X")
+                                                                {
+                                                                p1Won();
+                                                                }               
+                                                            else if (table[i][i]=="O")
+                                                                    {
+                                                                p2Won();  
+                                                                }
+                                                    }else if((table[i][i+2]==table[i+1][i+1])&&(table[i+1][i+1]==table[i+2][i]))
+                                                    {
+                                                        if(table[i][i+2]=="X")
+                                                                {
+                                                                p1Won();
+                                                                }               
+                                                            else if (table[i][i+2]=="O")
+                                                                    {
+                                                                p2Won();  
+                                                                }
+                                                    }
+                                            }
+                    }
+    console.log(moveCounter);
+    if((moveCounter>=9)&&(gameOver!=1))
+            {tiechecker();}
+}; 
 //Modal Buttons
 document.getElementById("pg-button").addEventListener('click',
     function()
@@ -137,18 +146,51 @@ document.getElementById("sb-button").addEventListener('click',
 //Table Squares
 tableElem.addEventListener('click',function(event){
         let move=event.target;
-        if((validSlot(move.innerHTML)==true)&&(gameStatus==0))
+        if((validSlot(move.innerHTML)==true)&&(gameOver==0))
                     {   move.innerHTML=currentPlayer;
                         let currentCellId=move.id;
                         table[currentCellId[0]][currentCellId[1]]=currentPlayer;
                         moveCounter++;
                         pSwitch();
-                        if (moveCounter>4){
+                        computerMove=true;
+                        if(moveCounter>4){
                             winnerCheck();
                         }
-                    }
-                 else gsStatus();
+                    }else { 
+                        gsStatus();
+                     }
+ if (computerStatus==true) 
+    {
+        computer();
+    }
 });
+function computer()
+    { console.log(`Urmeaza computer ${computerMove} in functie si gameOver ${gameOver}`);
+        if((computerMove===true)&&(gameOver==0)) //test if is the computer move and if the game is not over
+            { 
+                for (n=0;n<3;n++) //this for goes through all of the rows
+                {   if (computerMove===false) break;
+                    for(m=0;m<3;m++)// this goes through all the columns
+                        {   if (table[n][m]==null) //test if the slot is empty
+                                {
+                                    table[n][m]=currentPlayer; 
+                                    document.getElementById(`${n}${m}`).innerHTML=currentPlayer;
+                                    console.log(`Pc a pus ${currentPlayer} in ${n}${m}`);
+                                    computerMove=false;
+                                    console.log(`Urmeaza computer ${computerMove} pentru ca tocmai a pus`);
+                                    moveCounter++;
+                                    pSwitch();
+                                }
+                            if (computerMove===false) {break};
+                        }
+                }
+                if (moveCounter>4) //test if are enough moves to check if there is a winner;
+                    {
+                        winnerCheck();
+                    }
+            }  
+};
+      
 //Theme Changer 
 themeMenu.addEventListener("click",function(themeEvent){
     choosenTheme=themeEvent.target.id;
@@ -201,8 +243,14 @@ headerAction.addEventListener('click',function(headerEvent){
 landingModal.addEventListener("click",function(landingModalEvent){
     optionModal=landingModalEvent.target.id;
     switch(optionModal){
-        case 'pvp':document.getElementById("landing-modal-overlay").style.display="none"; break;
-        case 'pvpc':document.getElementById("landing-modal-overlay").style.display="none"; break;
+        case 'pvp':document.getElementById("landing-modal-overlay").style.display="none";
+                   reset();
+                   computerStatus=false;
+                   break;
+        case 'pvpc':document.getElementById("landing-modal-overlay").style.display="none";
+                    computerStatus=true;
+                    reset();
+                    break;
         case 'online': alert("Comming Soon");break;
         case 'closing-button': document.getElementById("landing-modal-overlay").style.display="none";
         default:break;
