@@ -33,6 +33,7 @@ function resetGame(){
 function resetTable()
 { gameStatus=1;
  moveCounter=0;
+ currentPlayer='X';
     for (let i=0; i<3;i++)
         {
         for(let j=0;j<3;j++)
@@ -101,13 +102,13 @@ function gameOver(valueWinner){
             default: break;
         }
     };
-function mmGameOver(){
-    switch (winnerCheck())
+function mmGameOver(valueWinner){
+    switch (valueWinner)
         {
-            case "X": -10; break;
-            case "O": +10; break;
-            case 0: 0; break;
-            default: undefined; break;
+            case "X": return -10;
+            case "O": return +10;
+            case 0: return 0; 
+            default: break;
         }
     };
 
@@ -132,40 +133,39 @@ tableElem.addEventListener('click',function(event){
                         table[currentCellId[0]][currentCellId[1]]=currentPlayer;
                         moveCounter++;
                         pSwitch();
-                        computerMove=true;
                         if(moveCounter>4){
                             let valueWinner=winnerCheck();
                             gameOver(valueWinner);
                         }
+                        computerMove=true;
                     }else { 
                         gsStatus();
                      }
- if ((computerStatus==true)&&(computerStatus==true)&&(gameStatus!=0)) 
-    { currentPlayer="O";
+ if ((computerMove==true)&&(computerStatus==true)&&(gameStatus!=0)) 
+    {
         computer();
-      currentPlayer="X";
     }
     
 });
-function minmax(table,mmMoveCounter,computerMove)
+function minmax(table,moveCounter,computerMove)
 {   let valueWinner=winnerCheck();
-    console.log(`S-a chemat min max valuewinner este ${valueWinner}`); 
     let result=mmGameOver(valueWinner);
-    if (result!=null){
+    if (((result==10)||(result==-10)||(result==0))&&(moveCounter==9)){
         return result;
     }
-    if(computerMove==false){
+    if(computerMove==false)
+    {
         let bestScore=+Infinity;
         for ( let n=0;n<3;n++) //this for goes through all of the rows
-            {for( let m=0;m<3;m++)// this goes through all the columns
-                {if (table[n][m]=="") //test if the slot is empty
+            { 
+                for( let m=0;m<3;m++)// this goes through all the columns
+                {
+                    if (table[n][m]==null) //test if the slot is empty
                     { 
                         table[n][m]="X";
-                        mmMoveCounter++;
-                        let score=minmax(table,mmMoveCounter,true);
-                        table[n][m]=null;
-                        console.log(`score in maxi ${score}`);
+                        let score=minmax(table,moveCounter+1,true);
                         bestScore=Math.min(score,bestScore);
+                        table[n][m]=null;
                      }
                 }
             }
@@ -173,14 +173,14 @@ function minmax(table,mmMoveCounter,computerMove)
      }else if (computerMove==true){
          let bestScore=-Infinity;
         for ( let n=0;n<3;n++) //this for goes through all of the rows
-            {for( let m=0;m<3;m++)// this goes through all the columns
-                {if (table[n][m]==null) //test if the slot is empty
+            { 
+                for( let m=0;m<3;m++)// this goes through all the columns
+                { 
+                    if (table[n][m]==null) //test if the slot is empty
                     { 
                         table[n][m]="O";
-                        mmMoveCounter++;
-                        let score=minmax(table,mmMoveCounter,false);
+                        let score=minmax(table,moveCounter+1,false);
                         table[n][m]=null;
-                        console.log(`score in mini ${score}`);
                         bestScore=Math.max(score,bestScore);
                      }
                 }
@@ -190,43 +190,35 @@ function minmax(table,mmMoveCounter,computerMove)
 
  };       
 function computer()
-{ 
+{   
     let bestScore=-Infinity;
     let bestColumn;
     let bestRow;
     for (let n=0;n<3;n++)
-     { //this for goes through all of the rows
-        console.log("primul for");
-       for(let m=0;m<3;m++)// this goes through all the columns
-            {console.log(`al doilea for casuta are ${table[n][m]}`);
-                if (table[n][m]==null) //test if the slot is empty
-                { console.log("cand e casuta goala");
+     {  console.log(`lin ${n}`);                                //this for goes through all of the rows
+       for(let m=0;m<3;m++)
+            {   console.log(`col ${m}`);                                  // this goes through all the columns
+                if (table[n][m]==null){                         //test if the slot is empty
                     table[n][m]="O"; 
-                    computerMove=false;
-                    moveCounter++;
-                    mmMoveCounter=moveCounter+1;
-                    let score=minmax(table,mmMoveCounter,computerMove);
-                    console.log(`linie ${n} coloana ${m} `);
-                    table[n][m]="";
+                    let score=minmax(table,moveCounter+1,false);
+                    table[n][m]=null;
                     if (score>bestScore){
                         bestScore=score;
-                        bestRow=m;
-                        bestColumn=n;
+                        bestRow=n;
+                        bestColumn=m;
                         }
                 }
             }
-    }
-    console.log(`Daca aici ${bestRow} si aici ${bestColumn} nu e numar imi bag pula`);
-    document.getElementById(`${bestRow}${bestColumn}`).innerHTML='O';
+        }
     table[bestRow][bestColumn]="O";
+    document.getElementById(`${bestRow}${bestColumn}`).innerHTML='O';
+    moveCounter++;
     if (moveCounter>4) //test if are enough moves to check if there is a winner;
         {
           let valueWinner=winnerCheck();
                 gameOver(valueWinner);
          }
-    
-};
-      
+}; 
 //Theme Changer 
 themeMenu.addEventListener("click",function(themeEvent){
     choosenTheme=themeEvent.target.id;
