@@ -1,7 +1,7 @@
 let currentPlayer="X";
 let p1=0;
 let p2=0;
-let gameOver=0;
+let gameStatus=1;
 var table=[[,,],[,,],[,,]];
 let moveCounter=0;
 let computerMove=false;
@@ -31,7 +31,7 @@ function resetGame(){
     
 };
 function resetTable()
-{ gameOver=0;
+{ gameStatus=1;
  moveCounter=0;
     for (let i=0; i<3;i++)
         {
@@ -44,40 +44,27 @@ function resetTable()
 };
 function p1Won(){
     p1++;
-    gameOver=1;
+    gameStatus=0;
     document.getElementById('wp1').innerHTML=p1; 
     document.getElementById("modal-overlay").setAttribute("style","display:initial;");
     document.getElementById('winner').innerText="Player One Has Won";
-    computerMove=false;
-    return 1;
 };
 function p2Won(){
     p2++;
-    gameOver=1;
+    gameStatus=0;
     document.getElementById('wp2').innerHTML=p2;
     document.getElementById("modal-overlay").setAttribute("style","display:initial;");
     document.getElementById('winner').innerText="Player Two Has Won";
-    computerMove=false;
-    return -1; 
 };
-function tiechecker(){
+function tie(){
                 computerMove=false;
                 document.getElementById("modal-overlay").setAttribute("style","display:initial;");
                 document.getElementById('winner').innerText="It's a tie my friend";
                 console.log(`Urmeaza computer ${computerMove} deoarece este egal`);
-                gameOver=1;
-                return 0;
+                gameStatus=0;
         };
-function validSlot(element){
-
-    if((element=="X")||(element)=="O")
-    {
-        return false;
-    }
-    else {return true;}
-}
 function gsStatus(){
-    if (gameOver==1) 
+    if (gameStatus==0) 
                     {
                     alert("Game is over, Press Restart to play again");
                     }
@@ -85,60 +72,45 @@ function gsStatus(){
                             alert("Please try another square");
                         }
 }
-//checks if the move is winner
+//search for a winning move
 function winnerCheck()
-{       
-                 for(let i=0;i<3;i++)
-                        {
-                        if((table[i][0]==table[i][1])&&(table[i][1]==table[i][2]))
-                            {
-                                if(table[i][0]=="X")
-                                    {
-                                        p1Won();
-                                    }
-                                    else if (table[i][0]=="O")
-                                        {
-                                            p2Won();
-                                        }
-                            }else if ((table[0][i]==table[1][i])&&(table[1][i]==table[2][i]))
-                                    {
-                                        if(table[0][i]=="X")
-                                            {
-                                                p1Won();
-                                            }
-                                            else if (table[0][i]=="O")
-                                                {
-                                                    p2Won();  
-                                                }
-                                    }else if(i==0)
-                                            {
-                                                if((table[i][i]==table[i+1][i+1])&&(table[i+1][i+1]==table[i+2][i+2]))
-                                                    {
-                                                        if(table[i][i]=="X")
-                                                                {
-                                                                p1Won();
-                                                                }               
-                                                            else if (table[i][i]=="O")
-                                                                    {
-                                                                p2Won();  
-                                                                }
-                                                    }else if((table[i][i+2]==table[i+1][i+1])&&(table[i+1][i+1]==table[i+2][i]))
-                                                    {
-                                                        if(table[i][i+2]=="X")
-                                                                {
-                                                                p1Won();
-                                                                }               
-                                                            else if (table[i][i+2]=="O")
-                                                                    {
-                                                                p2Won();  
-                                                                }
-                                                    }
-                                            }
-                    }
-    console.log(moveCounter);
-    if((moveCounter>=9)&&(gameOver!=1))
-            {tiechecker();}
+{    
+     for(let i=0;i<3;i++)
+        {
+            if((table[i][0]==table[i][1])&&(table[i][1]==table[i][2])) //search for winner on rows
+                     return table[i][0];
+            if ((table[0][i]==table[1][i])&&(table[1][i]==table[2][i])) //search for winner on columns
+                 return table[0][i];
+                
+        }
+        if((table[0][0]==table[1][1])&&(table[1][1]==table[2][2])) //search for winner on first diagonal
+                return table[0][0];
+
+        if((table[0][2]==table[1][1])&&(table[1][1]==table[2][0])) //search for winner on second diagonal
+                return table[0][2];
+        if(moveCounter==9) //if max number of moves are reached return null;
+            return 0;
 }; 
+let valueWinner=winnerCheck();
+function gameOver(valueWinner){
+    switch (winnerCheck())
+        {
+            case "X": p1Won(); break;
+            case "O": p2Won(); break;
+            case 0: tie(); break;
+            default: break;
+        }
+    };
+function mmGameOver(){
+    switch (winnerCheck())
+        {
+            case "X": -10; break;
+            case "O": +10; break;
+            case 0: 0; break;
+            default: undefined; break;
+        }
+    };
+
 //Modal Buttons
 document.getElementById("pg-button").addEventListener('click',
     function()
@@ -154,7 +126,7 @@ document.getElementById("sb-button").addEventListener('click',
 //Table Squares
 tableElem.addEventListener('click',function(event){
         let move=event.target;
-        if((validSlot(move.innerHTML)==true)&&(gameOver==0))
+        if((move.innerHTML=='')&&(gameStatus==1))
                     {   move.innerHTML=currentPlayer;
                         let currentCellId=move.id;
                         table[currentCellId[0]][currentCellId[1]]=currentPlayer;
@@ -162,41 +134,97 @@ tableElem.addEventListener('click',function(event){
                         pSwitch();
                         computerMove=true;
                         if(moveCounter>4){
-                            winnerCheck();
+                            let valueWinner=winnerCheck();
+                            gameOver(valueWinner);
                         }
                     }else { 
                         gsStatus();
                      }
- if (computerStatus==true) 
-    {
+ if ((computerStatus==true)&&(computerStatus==true)&&(gameStatus!=0)) 
+    { currentPlayer="O";
         computer();
+      currentPlayer="X";
     }
+    
 });
+function minmax(table,mmMoveCounter,computerMove)
+{   let valueWinner=winnerCheck();
+    console.log(`S-a chemat min max valuewinner este ${valueWinner}`); 
+    let result=mmGameOver(valueWinner);
+    if (result!=null){
+        return result;
+    }
+    if(computerMove==false){
+        let bestScore=+Infinity;
+        for ( let n=0;n<3;n++) //this for goes through all of the rows
+            {for( let m=0;m<3;m++)// this goes through all the columns
+                {if (table[n][m]=="") //test if the slot is empty
+                    { 
+                        table[n][m]="X";
+                        mmMoveCounter++;
+                        let score=minmax(table,mmMoveCounter,true);
+                        table[n][m]=null;
+                        console.log(`score in maxi ${score}`);
+                        bestScore=Math.min(score,bestScore);
+                     }
+                }
+            }
+        return bestScore;
+     }else if (computerMove==true){
+         let bestScore=-Infinity;
+        for ( let n=0;n<3;n++) //this for goes through all of the rows
+            {for( let m=0;m<3;m++)// this goes through all the columns
+                {if (table[n][m]==null) //test if the slot is empty
+                    { 
+                        table[n][m]="O";
+                        mmMoveCounter++;
+                        let score=minmax(table,mmMoveCounter,false);
+                        table[n][m]=null;
+                        console.log(`score in mini ${score}`);
+                        bestScore=Math.max(score,bestScore);
+                     }
+                }
+            }
+        return bestScore;
+     }
+
+ };       
 function computer()
-    { console.log(`Urmeaza computer ${computerMove} in functie si gameOver ${gameOver}`);
-        if((computerMove===true)&&(gameOver==0)) //test if is the computer move and if the game is not over
-            { 
-                for (n=0;n<3;n++) //this for goes through all of the rows
-                {   if (computerMove===false) break;
-                    for(m=0;m<3;m++)// this goes through all the columns
-                        {   if (table[n][m]==null) //test if the slot is empty
-                                {
-                                    table[n][m]=currentPlayer; 
-                                    document.getElementById(`${n}${m}`).innerHTML=currentPlayer;
-                                    console.log(`Pc a pus ${currentPlayer} in ${n}${m}`);
-                                    computerMove=false;
-                                    console.log(`Urmeaza computer ${computerMove} pentru ca tocmai a pus`);
-                                    moveCounter++;
-                                    pSwitch();
-                                }
-                            if (computerMove===false) {break};
+{ 
+    let bestScore=-Infinity;
+    let bestColumn;
+    let bestRow;
+    for (let n=0;n<3;n++)
+     { //this for goes through all of the rows
+        console.log("primul for");
+       for(let m=0;m<3;m++)// this goes through all the columns
+            {console.log(`al doilea for casuta are ${table[n][m]}`);
+                if (table[n][m]==null) //test if the slot is empty
+                { console.log("cand e casuta goala");
+                    table[n][m]="O"; 
+                    computerMove=false;
+                    moveCounter++;
+                    mmMoveCounter=moveCounter+1;
+                    let score=minmax(table,mmMoveCounter,computerMove);
+                    console.log(`linie ${n} coloana ${m} `);
+                    table[n][m]="";
+                    if (score>bestScore){
+                        bestScore=score;
+                        bestRow=m;
+                        bestColumn=n;
                         }
                 }
-                if (moveCounter>4) //test if are enough moves to check if there is a winner;
-                    {
-                        winnerCheck();
-                    }
-            }  
+            }
+    }
+    console.log(`Daca aici ${bestRow} si aici ${bestColumn} nu e numar imi bag pula`);
+    document.getElementById(`${bestRow}${bestColumn}`).innerHTML='O';
+    table[bestRow][bestColumn]="O";
+    if (moveCounter>4) //test if are enough moves to check if there is a winner;
+        {
+          let valueWinner=winnerCheck();
+                gameOver(valueWinner);
+         }
+    
 };
       
 //Theme Changer 
