@@ -4,12 +4,13 @@ let p2=0;
 let gameStatus=1;
 var table=[[,,],[,,],[,,]];
 let moveCounter=0;
-let computerMove=false;
+let computerTurn=false;
 let computerStatus;
 const tableElem=document.getElementById("table");
 const themeMenu=document.getElementById("theme-nav");
 const landingModal=document.getElementById("landing-modal-overlay");
 const headerAction=document.getElementById("header");
+let coordonate;
 
 function pSwitch(){
     if(currentPlayer=="X")
@@ -40,12 +41,14 @@ function resetTable()
                 {
                 table[i][j]=null;
                 document.getElementById(`${i}${j}`).innerHTML=null;
+                document.getElementById(`${i}${j}`).style.backgroundColor="initial";
                 }
         }
 };
 function p1Won(){
     p1++;
     gameStatus=0;
+    computerTurn=false;
     document.getElementById('wp1').innerHTML=p1; 
     document.getElementById("modal-overlay").setAttribute("style","display:initial;");
     document.getElementById('winner').innerText="Player One Has Won";
@@ -53,15 +56,16 @@ function p1Won(){
 function p2Won(){
     p2++;
     gameStatus=0;
+    computerTurn=false;
     document.getElementById('wp2').innerHTML=p2;
     document.getElementById("modal-overlay").setAttribute("style","display:initial;");
     document.getElementById('winner').innerText="Player Two Has Won";
 };
 function tie(){
-                computerMove=false;
+                computerTurn=false;
                 document.getElementById("modal-overlay").setAttribute("style","display:initial;");
                 document.getElementById('winner').innerText="It's a tie my friend";
-                console.log(`Urmeaza computer ${computerMove} deoarece este egal`);
+                console.log(`Meci egal nr de miscari ${moveCounter}, winner check este ${winningCase}`);
                 gameStatus=0;
         };
 function gsStatus(){
@@ -75,35 +79,81 @@ function gsStatus(){
 }
 //search for a winning move
 function winnerCheck()
-{    
+{   
      for(let i=0;i<3;i++)
         {
             if((table[i][0]==table[i][1])&&(table[i][1]==table[i][2])) //search for winner on rows
-                     return table[i][0];
+                     {   
+                         coordonate=i;
+                         line="row";
+                         return table[i][0];
+                        }
             if ((table[0][i]==table[1][i])&&(table[1][i]==table[2][i])) //search for winner on columns
-                 return table[0][i];
+                 {   coordonate=i;
+                     line="column";
+                     return table[0][i];
+                    }
                 
         }
         if((table[0][0]==table[1][1])&&(table[1][1]==table[2][2])) //search for winner on first diagonal
-                return table[0][0];
+                { line="first";
+                    return table[0][0];
+                }
 
         if((table[0][2]==table[1][1])&&(table[1][1]==table[2][0])) //search for winner on second diagonal
-                return table[0][2];
-        if(moveCounter==9) //if max number of moves are reached return null;
+                { line="second";
+                  return table[0][2];
+                }
+        if(moveCounter==9) //if max number of moves is reached return null;
             return 0;
+    return undefined;
 }; 
-let valueWinner=winnerCheck();
-function gameOver(valueWinner){
-    switch (winnerCheck())
+function wonLine(line,coordonate)
+{
+    switch(line){
+        case line="row":
+        document.getElementById(`${coordonate}${1}`).style.backgroundColor="red";
+        document.getElementById(`${coordonate}${2}`).style.backgroundColor="red";
+        document.getElementById(`${coordonate}${0}`).style.backgroundColor="red";
+        break;
+        case line="column":
+        document.getElementById(`${1}${coordonate}`).style.backgroundColor="red";
+        document.getElementById(`${2}${coordonate}`).style.backgroundColor="red";
+        document.getElementById(`${0}${coordonate}`).style.backgroundColor="red";
+        break;
+        case line="first":
+        document.getElementById(`${0}${0}`).style.backgroundColor="red";
+        document.getElementById(`${1}${1}`).style.backgroundColor="red";
+        document.getElementById(`${2}${2}`).style.backgroundColor="red";
+        break;
+        case line="second":
+        document.getElementById(`${0}${2}`).style.backgroundColor="red";
+        document.getElementById(`${1}${1}`).style.backgroundColor="red";
+        document.getElementById(`${2}${0}`).style.backgroundColor="red";
+        break;
+    }
+};
+let winningCase=winnerCheck();
+function gameOver(winningCase){
+    switch (winnerCheck(winningCase,coordonate,line))
         {
-            case "X": p1Won(); break;
-            case "O": p2Won(); break;
-            case 0: tie(); break;
+            case "X": p1Won(); 
+            computerTurn==false;
+            wonLine(line,coordonate);
+            break;
+            case "O": p2Won(); 
+            computerTurn==false;
+            wonLine(line,coordonate) ;
+            break;
+            case 0: 
+            tie(); 
+            computerTurn==false;
+            break;
             default: break;
         }
     };
-function mmGameOver(valueWinner){
-    switch (valueWinner)
+function mmGameOver(winningCase){
+    switch (winningCase)
         {
             case "X": return -10;
             case "O": return +10;
@@ -111,6 +161,45 @@ function mmGameOver(valueWinner){
             default: break;
         }
     };
+function minmax(table,moveCounter,isComputer)
+{   
+    let winningCase=winnerCheck();
+    let score=mmGameOver(winningCase);
+    if (((score==10)||(score==-10)||(score==0))&&(moveCounter<10)){
+        return score;
+    }
+    if(isComputer==false) //minimizer
+    {let bestScore=+Infinity;
+        for ( let n=0;n<3;n++) //this for goes through all of the rows
+            {for( let m=0;m<3;m++)// this goes through all the columns
+                {if (table[n][m]==null) //test if the slot is empty
+                    { 
+                        table[n][m]="X";
+                        console.log(`mini${moveCounter}`);
+                        score=minmax(table,moveCounter+1,true);
+                        bestScore=Math.min(score,bestScore);
+                        table[n][m]=null;
+                     }
+                }
+            }
+        return bestScore;
+     }else if (isComputer==true){
+         let bestScore=-Infinity;
+        for ( let n=0;n<3;n++) //this for goes through all of the rows
+            {for( let m=0;m<3;m++)// this goes through all the columns
+                {if (table[n][m]==null) //test if the slot is empty
+                    { 
+                        table[n][m]="O";
+                        score=minmax(table,moveCounter+1,false);
+                        table[n][m]=null;
+                        bestScore=Math.max(score,bestScore);
+                     }
+                }
+            }
+        return bestScore;
+     }
+
+ };
 
 //Modal Buttons
 document.getElementById("pg-button").addEventListener('click',
@@ -132,74 +221,34 @@ tableElem.addEventListener('click',function(event){
                         let currentCellId=move.id;
                         table[currentCellId[0]][currentCellId[1]]=currentPlayer;
                         moveCounter++;
+                        console.log(`Player ${moveCounter}`);
                         pSwitch();
                         if(moveCounter>4){
                             let valueWinner=winnerCheck();
                             gameOver(valueWinner);
                         }
-                        computerMove=true;
+                        computerTurn=true;
                     }else { 
+                        console.log(`${computerTurn}`)
                         gsStatus();
                      }
- if ((computerMove==true)&&(computerStatus==true)&&(gameStatus!=0)) 
+ if ((computerTurn==true)&&(computerStatus==true)&&(gameStatus==1)) 
     {
         computer();
     }
     
 });
-function minmax(table,moveCounter,computerMove)
-{   let valueWinner=winnerCheck();
-    let result=mmGameOver(valueWinner);
-    if (((result==10)||(result==-10)||(result==0))&&(moveCounter==9)){
-        return result;
-    }
-    if(computerMove==false)
-    {
-        let bestScore=+Infinity;
-        for ( let n=0;n<3;n++) //this for goes through all of the rows
-            { 
-                for( let m=0;m<3;m++)// this goes through all the columns
-                {
-                    if (table[n][m]==null) //test if the slot is empty
-                    { 
-                        table[n][m]="X";
-                        let score=minmax(table,moveCounter+1,true);
-                        bestScore=Math.min(score,bestScore);
-                        table[n][m]=null;
-                     }
-                }
-            }
-        return bestScore;
-     }else if (computerMove==true){
-         let bestScore=-Infinity;
-        for ( let n=0;n<3;n++) //this for goes through all of the rows
-            { 
-                for( let m=0;m<3;m++)// this goes through all the columns
-                { 
-                    if (table[n][m]==null) //test if the slot is empty
-                    { 
-                        table[n][m]="O";
-                        let score=minmax(table,moveCounter+1,false);
-                        table[n][m]=null;
-                        bestScore=Math.max(score,bestScore);
-                     }
-                }
-            }
-        return bestScore;
-     }
-
- };       
+       
 function computer()
 {   
     let bestScore=-Infinity;
     let bestColumn;
     let bestRow;
-    for (let n=0;n<3;n++)
-     {  console.log(`lin ${n}`);                                //this for goes through all of the rows
-       for(let m=0;m<3;m++)
-            {   console.log(`col ${m}`);                                  // this goes through all the columns
-                if (table[n][m]==null){                         //test if the slot is empty
-                    table[n][m]="O"; 
+    for (let n=0;n<3;n++){//this for goes through all of the rows
+       for(let m=0;m<3;m++)// this goes through all the columns
+            {if (table[n][m]==null){//test if the slot is empty
+                    table[n][m]="O";
+                    console.log(`Computer move${moveCounter}`); 
                     let score=minmax(table,moveCounter+1,false);
                     table[n][m]=null;
                     if (score>bestScore){
@@ -213,11 +262,13 @@ function computer()
     table[bestRow][bestColumn]="O";
     document.getElementById(`${bestRow}${bestColumn}`).innerHTML='O';
     moveCounter++;
+    pSwitch()
     if (moveCounter>4) //test if are enough moves to check if there is a winner;
         {
           let valueWinner=winnerCheck();
-                gameOver(valueWinner);
+          gameOver(valueWinner);
          }
+    computerTurn=false;
 }; 
 //Theme Changer 
 themeMenu.addEventListener("click",function(themeEvent){
