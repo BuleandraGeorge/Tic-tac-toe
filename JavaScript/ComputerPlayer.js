@@ -1,17 +1,20 @@
-import {pSwitch, winnerCheck, gameOver, computerTurn, moveCounter} from './Functions.js';
+import {winnerCheck, gameOver, moveCounter} from './Functions.js';
 import {table} from './index.js';
-export {computer, minmax};
+export {computer, minmax,minmaxCounter};
+let minmaxCounter;
 function computer()
-{   
-    let bestScore=-Infinity;
+{   let bestScore=-Infinity;
     let bestColumn;
     let bestRow;
+    minmaxCounter=moveCounter;
     for (let n=0;n<3;n++){//this for goes through all of the rows
        for(let m=0;m<3;m++)// this goes through all the columns
             {if (table[n][m]==null){//test if the slot is empty
                     table[n][m]="O";
-                    let score=minmax(table,moveCounter+1,false);
+                    minmaxCounter++;
+                    let score=minmax(table,0,false);
                     table[n][m]=null;
+                    minmaxCounter--;
                     if (score>bestScore){
                         bestScore=score;
                         bestRow=n;
@@ -22,14 +25,6 @@ function computer()
         }
     table[bestRow][bestColumn]="O";
     document.getElementById(`${bestRow}${bestColumn}`).innerHTML='O';
-    moveCounter++;
-    computerTurn=false;
-    pSwitch()
-    if (moveCounter>4) //test if are enough moves to check if there is a winner;
-        {
-          let valueWinner=winnerCheck();
-          gameOver(valueWinner);
-         }
    
 }; 
 function mmGameOver(winningCase){
@@ -41,7 +36,7 @@ function mmGameOver(winningCase){
             default: break;
         }
     };
-function minmax(table,moveCounter,isComputer)
+function minmax(table,minmaxCounter,isComputer)
 {   
     let winningCase=winnerCheck();
     let score=mmGameOver(winningCase);
@@ -55,7 +50,7 @@ function minmax(table,moveCounter,isComputer)
                 {if (table[n][m]==null) //test if the slot is empty
                     { 
                         table[n][m]="X";
-                        let score=minmax(table,moveCounter+1,true);
+                        let score=minmax(table,minmaxCounter+1,true);
                         bestScore=Math.min(score, bestScore);
                         table[n][m]=null;
                      }
@@ -71,7 +66,7 @@ function minmax(table,moveCounter,isComputer)
                 {if (table[n][m]==null) //test if the slot is empty
                     { 
                         table[n][m]="O";
-                        let score=minmax(table,moveCounter+1,false);
+                        let score=minmax(table,minmaxCounter+1,false);
                         bestScore=Math.max(score,bestScore);
                         table[n][m]=null;
                      }

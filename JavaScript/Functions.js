@@ -1,11 +1,12 @@
-export{winnerCheck, pSwitch, resetGame, resetTable, currentPlayer, moveCounter,gameOver,computerTurn};
+export{winnerCheck, pSwitch, resetGame, resetTable, moveCounter,gameOver,computerTurn,currentPlayer,gsStatus};
 import {moveCounter, table, gameStatus} from './index.js';
-let p1=0;
+import{minmaxCounter} from './ComputerPlayer.js';
 let p2=0;
-let currentPlayer="X";
+let p1=0;
 let coordonate;
 let line;
 let computerTurn=false;
+let currentPlayer="X";
 function winnerCheck()
 {   
      for(let i=0;i<3;i++)
@@ -34,7 +35,7 @@ function winnerCheck()
                     line="second";
                     return table[0][2];
                 }
-        if(moveCounter==9) //if max number of moves is reached return 0;
+        if(moveCounter==9||minmaxCounter==9) //if max number of moves is reached return 0;
             return 0;
 };
 function wonLine(line,coordonate)

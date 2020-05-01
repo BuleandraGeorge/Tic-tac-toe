@@ -1,10 +1,12 @@
-import {winnerCheck, pSwitch, resetGame, resetTable,currentPlayer,gameOver,computerTurn} from './Functions.js';
+import {winnerCheck, pSwitch, resetGame, resetTable,gameOver,currentPlayer,gsStatus} from './Functions.js';
 import {computer} from './ComputerPlayer.js';
 export {moveCounter, gameStatus, table};
 let table=[[,,],[,,],[,,]];
 let computerStatus=false;
 let gameStatus=true;
+let computerTurn=false;
 let moveCounter=0;
+
 const tableElem=document.getElementById("table");
 const themeMenu=document.getElementById("theme-nav");
 const landingModal=document.getElementById("landing-modal-overlay");
@@ -17,18 +19,26 @@ tableElem.addEventListener('click',function(event){
                         let currentCellId=move.id;
                         table[currentCellId[0]][currentCellId[1]]=currentPlayer;
                         moveCounter++;
-                        pSwitch();
                         if(moveCounter>4){
                             let valueWinner=winnerCheck();
                             gameOver(valueWinner);
                         }
-                         let computerTurn=true;
+                    pSwitch();
+                    computerTurn=true;
                     }else { 
                         gsStatus();
                      }
  if ((computerTurn==true)&&(computerStatus==true)&&(gameStatus==true)) 
     {
         computer();
+        if (moveCounter>4) //test if are enough moves to check if there is a winner;
+        {
+          let valueWinner=winnerCheck();
+          gameOver(valueWinner);
+         }
+        pSwitch();
+        computerTurn=false;
+        moveCounter++;
     }
     
 });
