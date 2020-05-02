@@ -82,8 +82,36 @@ headerAction.addEventListener('click',function(headerEvent){
         case 'bottom':document.getElementById("landing-modal-overlay").style.display="initial";
                     document.getElementById("closing-button").style.display="initial";
                     break;
-        case 'player1':break;
-        case 'player2':break;
+        case 'player1':
+                       document.getElementById('name-p1').value=document.getElementById('player1').innerHTML;
+                       document.getElementById('player1').innerHTML='';
+                       document.getElementById('name-changer-p1').style.display="inline";
+                       let set1=document.getElementsByClassName('name-button-p1');
+                        set1[0].addEventListener('click',function(){
+                            let nameValue=document.getElementById('name-p1').value;
+                            if(nameValue!=''){
+                                    document.getElementById('player1').innerHTML=document.getElementById('name-p1').value;
+                                    document.getElementById('name-changer-p1').style.display="none";
+                                    }else {
+                                            alert('It is required to insert a name');
+                                            }    
+                        });          
+                        break;
+        case 'player2':
+                       document.getElementById('name-p2').value=document.getElementById('player2').innerHTML;
+                       document.getElementById('player2').innerHTML='';
+                       document.getElementById('name-changer-p2').style.display="inline";
+                       let set2=document.getElementsByClassName('name-button-p2');
+                        set2[0].addEventListener('click',function(){
+                            let nameValue=document.getElementById('name-p2').value;
+                            if(nameValue!=''){
+                                    document.getElementById('player2').innerHTML=document.getElementById('name-p2').value;
+                                    document.getElementById('name-changer-p2').style.display="none";
+                                    }else {
+                                            alert('It is required to insert a name');
+                                            }    
+                        });
+                       break; 
         default:break;
     }
 });
