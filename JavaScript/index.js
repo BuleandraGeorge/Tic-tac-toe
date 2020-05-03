@@ -1,12 +1,7 @@
-import {winnerCheck, pSwitch, resetGame, resetTable,gameOver,currentPlayer,gsStatus} from './Functions.js';
-import {computer} from './ComputerPlayer.js';
-export {moveCounter, gameStatus, table};
+import {computer,gsStatus,WON,resetGame,resetTable,computerTurn,gameStatus,currentPlayer} from './Functions.js';
+export {table};
 let table=[[,,],[,,],[,,]];
 let computerStatus=false;
-let gameStatus=true;
-let computerTurn=false;
-let moveCounter=0;
-
 const tableElem=document.getElementById("table");
 const themeMenu=document.getElementById("theme-nav");
 const landingModal=document.getElementById("landing-modal-overlay");
@@ -15,33 +10,21 @@ const headerAction=document.getElementById("header");
 tableElem.addEventListener('click',function(event){
         let move=event.target;
         if((move.innerHTML=='')&&(gameStatus==true))
-                    {   move.innerHTML=currentPlayer;
-                        let currentCellId=move.id;
-                        table[currentCellId[0]][currentCellId[1]]=currentPlayer;
-                        moveCounter++;
-                        if(moveCounter>4){
-                            let valueWinner=winnerCheck();
-                            gameOver(valueWinner);
-                        }
-                    pSwitch();
-                    computerTurn=true;
-                    }else { 
-                        gsStatus();
-                     }
- if ((computerTurn==true)&&(computerStatus==true)&&(gameStatus==true)) 
-    {
-        computer();
-        if (moveCounter>4) //test if are enough moves to check if there is a winner;
-        {
-          let valueWinner=winnerCheck();
-          gameOver(valueWinner);
-         }
-        pSwitch();
-        computerTurn=false;
-        moveCounter++;
-    }
-    
+            {
+                let currentCellId=move.id;
+                table[currentCellId[0]][currentCellId[1]]=currentPlayer;
+                move.innerHTML=currentPlayer;
+                WON();
+            }
+        else gsStatus();
+ 
+        if ((computerTurn==true)&&(computerStatus==true)&&(gameStatus==true)&&(move.innerHTML!=null)) 
+            {
+                computer();
+                WON();
+            }  
 });
+
 //Theme Changer 
 themeMenu.addEventListener("click",function(themeEvent){
     let choosenTheme=themeEvent.target.id;
@@ -72,7 +55,7 @@ themeMenu.addEventListener("click",function(themeEvent){
 headerAction.addEventListener('click',function(headerEvent){
     let headerElement=headerEvent.target.id;
     switch(headerElement){
-        case 'reset-table':resetTable(); ;
+        case 'reset-table':resetTable();
                            break;
         case 'reset-scores': resetGame(); 
                             break;
