@@ -35,15 +35,18 @@ function computer()
     document.getElementById(`${bestRow}${bestColumn}`).innerHTML='O';
     computerTurn=false;
 }; 
+
 //-----MIN MAX ALGORITHM --------///
 function minmax(table,moveNo,isComputer)
-{   
+{ 
     let winner=winnerCheck();
-    let minmaxScore=mmGameOver(winner);
-    if ((minmaxScore==10)||(minmaxScore==-10)||(minmaxScore==0))
-    {
-        return minmaxScore;
-    }
+    let score;
+    if(winner=="X") {score=-10;}
+    else if(winner=="O") {score=+10;}
+        else if(winner==0) {score=0;}
+    if((score==10)||(score==-10)||(score==0))
+        return score;
+        else if(moveNo==9) return 0;
     if (isComputer==false)
         {
             let bestScore=+Infinity;
@@ -82,15 +85,6 @@ function minmax(table,moveNo,isComputer)
      }
  };
  // -----FUNCTION FOR SCORE MIN MAX --------
- function mmGameOver(winner){
-    switch (winner)
-        {
-            case "X": return -10; //Human Minimizer
-            case "O": return +10; //AI    Maximizer
-            case 0: return 0; // DRAW
-            default: break;
-        }
-};
 //---------------------------------------FUNCTIONS------------------------
 function WON()
 {
@@ -132,11 +126,10 @@ function winnerCheck()
                 line="second";
                 return table[0][2];
             }
-        if(moveCounter==9) //if max number of moves is reached return 0;
+        if(moveCounter==9)//if max number of moves is reached return 0;
            {
              return 0;
            }
-    return null;
 };
 function gameOver(winner,line,coordonate,){
     switch (winner)
