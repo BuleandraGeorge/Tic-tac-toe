@@ -15,12 +15,12 @@ function computer()
     let bestRow;
     for (let n=0;n<3;n++){
        for(let m=0;m<3;m++)
-            { if (table[n][m]=='')
+            { if (table[n][m]==null)
                 {
                     table[n][m]="O";
                     moveCounter++;
                     let score=minmax(table,moveCounter,false);
-                    table[n][m]='';
+                    table[n][m]=null;
                     moveCounter--;
                     if (score>bestScore)
                         {
@@ -54,12 +54,12 @@ function minmax(table,moveNo,isComputer)
                 {
                     for( let m=0;m<3;m++)
                         {
-                            if (table[n][m]=='')
+                            if (table[n][m]==null)
                                 {   
                                     table[n][m]="X";
                                     let score=minmax(table,moveNo+1,true);
                                     bestScore=Math.min(score, bestScore);
-                                    table[n][m]='';
+                                    table[n][m]=null;
                                 }
                         }
                 }
@@ -72,12 +72,12 @@ function minmax(table,moveNo,isComputer)
             { 
                 for( let m=0;m<3;m++)
                 {
-                    if (table[n][m]=='')
+                    if (table[n][m]==null)
                         {
                             table[n][m]="O";
                             let score=minmax(table,moveNo+1,false);
                             bestScore=Math.max(score,bestScore);
-                            table[n][m]='';
+                            table[n][m]=null;
                         }
                 }
             }
@@ -103,26 +103,25 @@ function winnerCheck()
 {   
      for(let h=0;h<3;h++)
         {  
-            if((table[h][0]==table[h][1])&&(table[h][1]==table[h][2])&&(table[h][2]!='')) //search for winner on rows
+            if((table[h][0]==table[h][1])&&(table[h][1]==table[h][2])&&(table[h][2]!='')&&(table[h][0]!=null)) //search for winner on rows
                         {   
                             coordonate=h;
                             line="row";
-                            console.log(`${table[h][0]}${table[h][1]}${table[h][2]}`);
                             return table[h][0];
                          }
-            if((table[0][h]==table[1][h])&&(table[1][h]==table[2][h])&&(table[2][h]!='')) //search for winner on columns
+            if((table[0][h]==table[1][h])&&(table[1][h]==table[2][h])&&(table[2][h]!='')&&(table[0][h]!=null)) //search for winner on columns
                        { 
                         coordonate=h;
                         line="column";
                         return table[0][h];
                         }
         }
-        if((table[0][0]==table[1][1])&&(table[1][1]==table[2][2])&&(table[0][0]!='')) //search for winner on first diagonal
+        if((table[0][0]==table[1][1])&&(table[1][1]==table[2][2])&&(table[0][0]!=null)) //search for winner on first diagonal
             {
                 line="first";
                 return table[0][0];
             }
-        if((table[0][2]==table[1][1])&&(table[1][1]==table[2][0])&&(table[0][2]!='')) //search for winner on second diagonal
+        if((table[0][2]==table[1][1])&&(table[1][1]==table[2][0])&&(table[0][2]!=null)) //search for winner on second diagonal
             {
                 line="second";
                 return table[0][2];

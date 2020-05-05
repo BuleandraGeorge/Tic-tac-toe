@@ -1,6 +1,6 @@
 import {computer,gsStatus,WON,resetGame,resetTable,computerTurn,gameStatus,currentPlayer} from './Functions.js';
 export {table};
-let table=[[,,],[,,],[,,]];
+let table=[[null,null,null],[null,null,null],[null,null,null]];
 let computerStatus=false;
 const tableElem=document.getElementById("table");
 const themeMenu=document.getElementById("theme-nav");
@@ -9,17 +9,16 @@ const headerAction=document.getElementById("header");
 //Table Squares
 tableElem.addEventListener('click',function(event){
         let move=event.target;
-        console.log(move.innerHTML);
-        if((move.innerHTML=='')&&(gameStatus==true))
+        let currentCellId=move.id;
+        if((table[currentCellId[0]][currentCellId[1]]==null)&&(gameStatus==true))
             {
-                let currentCellId=move.id;
                 table[currentCellId[0]][currentCellId[1]]=currentPlayer;
                 move.innerHTML=currentPlayer;
                 WON();
             }
         else gsStatus();
  
-        if ((computerTurn==true)&&(computerStatus==true)&&(gameStatus==true)&&(move.innerHTML!=null)) 
+        if ((computerTurn==true)&&(computerStatus==true)&&(gameStatus==true)&&(table[currentCellId[0]][currentCellId[1]]!=null)) 
             {
                 computer();
                 WON();
