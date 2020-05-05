@@ -48,3 +48,13 @@ nav{
 .hb-container:hover #bottom{
     background-color: #e60000;
 }
+.winning-line{
+    background-color:#55ffff;
+    color:#fe4164;
+}
+#info:hover{
+    text-shadow: 0 0 10px black;
+}
+#close:hover{
+    text-shadow: 0 0 10px black;
+}

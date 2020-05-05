@@ -200,3 +200,26 @@ nav{
 #name-changer-p2{
     display:none;
 }
+#modal-buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+#info,#close{
+padding: 5px;
+margin:5px;
+}
+#modal-info{
+    display:none;
+    position: absolute;
+    z-index: +2;
+    background-color: inherit;
+    width: 60%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    transform: translate(27%, 50%);
+    box-shadow: 0 0 10px black;
+}
+#modal-info:hover{
+    display: initial;
+}

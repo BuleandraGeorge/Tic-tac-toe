@@ -178,24 +178,24 @@ function wonLine(line,coordonate)
 {
     switch(line){
         case line="row":
-        document.getElementById(`${coordonate}${1}`).style.backgroundColor="red";
-        document.getElementById(`${coordonate}${2}`).style.backgroundColor="red";
-        document.getElementById(`${coordonate}${0}`).style.backgroundColor="red";
+        document.getElementById(`${coordonate}${1}`).classList.add("winning-line");
+        document.getElementById(`${coordonate}${2}`).classList.add("winning-line");
+        document.getElementById(`${coordonate}${0}`).classList.add("winning-line");
         break;
         case line="column":
-        document.getElementById(`${1}${coordonate}`).style.backgroundColor="red";
-        document.getElementById(`${2}${coordonate}`).style.backgroundColor="red";
-        document.getElementById(`${0}${coordonate}`).style.backgroundColor="red";
+        document.getElementById(`${1}${coordonate}`).classList.add("winning-line");
+        document.getElementById(`${2}${coordonate}`).classList.add("winning-line");
+        document.getElementById(`${0}${coordonate}`).classList.add("winning-line");
         break;
         case line="first":
-        document.getElementById(`${0}${0}`).style.backgroundColor="red";
-        document.getElementById(`${1}${1}`).style.backgroundColor="red";
-        document.getElementById(`${2}${2}`).style.backgroundColor="red";
+        document.getElementById(`${0}${0}`).classList.add("winning-line");
+        document.getElementById(`${1}${1}`).classList.add("winning-line");
+        document.getElementById(`${2}${2}`).classList.add("winning-line");
         break;
         case line="second":
-        document.getElementById(`${0}${2}`).style.backgroundColor="red";
-        document.getElementById(`${1}${1}`).style.backgroundColor="red";
-        document.getElementById(`${2}${0}`).style.backgroundColor="red";
+        document.getElementById(`${0}${2}`).classList.add("winning-line");
+        document.getElementById(`${1}${1}`).classList.add("winning-line");
+        document.getElementById(`${2}${0}`).classList.add("winning-line");
         break;
         default:break;
     }
@@ -240,7 +240,7 @@ function resetTable()
                 {
                 table[i][j]=null;
                 document.getElementById(`${i}${j}`).innerHTML=null;
-                document.getElementById(`${i}${j}`).style.backgroundColor="initial";
+                document.getElementById(`${i}${j}`).classList.remove("winning-line");
                 }
         }
 };

@@ -6,13 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" rel="stylesheet" href="Styling/style.css">
     <link id="theme" type="text/css" rel="stylesheet" href="Styling/themes/light_theme.css">
-    <link type="text/css" rel="stylesheet" href="Styling/media_querry.css">
+    <link type="text/css" rel="stylesheet" href="Styling/media_querry.css">\<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     <title>Tic Tac Toe</title>
 </head>
 <body class="bg-txt-font-family">
     <div id="landing-modal-overlay" class="bg-overlay">
         <div id="landing-modal" class="bg-modal">
-        <span id="closing-button">X</span>
+        <div id="modal-buttons">
+            <i class="fas fa-info" id='info'></i>
+            <i class="fas fa-times" id='close'></i>
+        </div>
+            <div id="info-modal">
+                <p>Hi! Welcome on Tic Tac TOE!</p>
+                <p>You can choose from different playing modes from player versus player, Player vs Computer or soon you can play online.</p>
+                <p>Also you can change the theme of the game from Light to Dark, Neon, and Jungle, soon more themes will be added.</p>
+                <p>During the game you can set the name of player by clicking the name.</p>
+            </div>
             <h1 id="landing-heading">TIC TAC TOE</h1>
             <nav>
                 <ul id="modal-nav">

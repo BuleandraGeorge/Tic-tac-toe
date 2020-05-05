@@ -35,3 +35,13 @@
 #modal-overlay{
      background-color:rgba(0,0,0,0.5);
 }
+.winning-line{
+    background-color:rgb(158, 158, 158);
+    color:black;
+}
+#info:hover{
+    text-shadow: 0 0 10px white;
+}
+#close:hover{
+    text-shadow: 0 0 10px white;
+}

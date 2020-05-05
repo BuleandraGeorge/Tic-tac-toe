@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
  
 .bg-txt-font-family{
-    background-color: rgb(224, 234, 238);
+    background-color: #f4eeff;
     color:black;
     font-family: "Quicksand";
 }
 .fade-effect:hover, .fade-effect:focus, .fade-effect:active{
-    background-color: rgb(70, 205, 250);
+    background-color: #a6b1e1;
     color: white;
 }
 .bg-overlay{
@@ -33,4 +33,14 @@
 }
 #modal-overlay{
      background-color:rgba(0,0,0,0.5);
+}
+.winning-line{
+    background-color:#424874;
+    color:white;
+}
+#info:hover{
+    text-shadow: 0 0 10px black;
+}
+#close:hover{
+    text-shadow: 0 0 10px black;
 }

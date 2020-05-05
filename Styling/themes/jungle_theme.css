@@ -36,3 +36,28 @@
 #modal-overlay{
      background-color:rgba(0,0,0,0.5);
 }
+.winning-line{
+    background-color:#a4c100;;
+    color:#ff0000;
+}
+#top{
+ background-color:#be3400; 
+}
+#center{
+ background-color:#be3400;
+}
+#bottom{
+ background-color:#be3400;
+}
+#score-board{
+    background-color:#a4c100;
+    height:4vh;
+    padding:1vh 0;
+    box-shadow: inset 0 0 5px 1px #9b4c38;;
+}
+#info:hover{
+    text-shadow: 0 0 10px black;
+}
+#close:hover{
+    text-shadow: 0 0 10px black;
+}

@@ -110,8 +110,9 @@ landingModal.addEventListener("click",function(landingModalEvent){
                     computerStatus=true;
                     resetGame();
                     break;
-        case 'online': alert("Comming Soon");break;
-        case 'closing-button': document.getElementById("landing-modal-overlay").style.display="none";
+        case 'online': alert("Comming Soon");
+                    break;
+        case 'close': document.getElementById("landing-modal-overlay").style.display="none";
         default:break;
     }
 });
