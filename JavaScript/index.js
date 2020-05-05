@@ -9,6 +9,7 @@ const headerAction=document.getElementById("header");
 //Table Squares
 tableElem.addEventListener('click',function(event){
         let move=event.target;
+        console.log(move.innerHTML);
         if((move.innerHTML=='')&&(gameStatus==true))
             {
                 let currentCellId=move.id;
@@ -63,7 +64,7 @@ headerAction.addEventListener('click',function(headerEvent){
         case 'top': //the hamburger menu as you have seen is made out from 4 components, container, top, center and bottom
         case 'center': // because of that, the user happens to click on different component so i had to add all of this cases
         case 'bottom':document.getElementById("landing-modal-overlay").style.display="initial";
-                    document.getElementById("closing-button").style.display="initial";
+                    document.getElementById("close").style.display="initial";
                     break;
         case 'player1':
                        document.getElementById('name-p1').value=document.getElementById('player1').innerHTML;

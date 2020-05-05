@@ -15,12 +15,12 @@ function computer()
     let bestRow;
     for (let n=0;n<3;n++){
        for(let m=0;m<3;m++)
-            { if (table[n][m]==null)
+            { if (table[n][m]=='')
                 {
                     table[n][m]="O";
                     moveCounter++;
                     let score=minmax(table,moveCounter,false);
-                    table[n][m]=null;
+                    table[n][m]='';
                     moveCounter--;
                     if (score>bestScore)
                         {
@@ -54,12 +54,12 @@ function minmax(table,moveNo,isComputer)
                 {
                     for( let m=0;m<3;m++)
                         {
-                            if (table[n][m]==null)
+                            if (table[n][m]=='')
                                 {   
                                     table[n][m]="X";
                                     let score=minmax(table,moveNo+1,true);
                                     bestScore=Math.min(score, bestScore);
-                                    table[n][m]=null;
+                                    table[n][m]='';
                                 }
                         }
                 }
@@ -72,12 +72,12 @@ function minmax(table,moveNo,isComputer)
             { 
                 for( let m=0;m<3;m++)
                 {
-                    if (table[n][m]==null)
+                    if (table[n][m]=='')
                         {
                             table[n][m]="O";
                             let score=minmax(table,moveNo+1,false);
                             bestScore=Math.max(score,bestScore);
-                            table[n][m]=null;
+                            table[n][m]='';
                         }
                 }
             }
@@ -107,10 +107,11 @@ function winnerCheck()
                         {   
                             coordonate=h;
                             line="row";
+                            console.log(`${table[h][0]}${table[h][1]}${table[h][2]}`);
                             return table[h][0];
                          }
             if((table[0][h]==table[1][h])&&(table[1][h]==table[2][h])&&(table[2][h]!='')) //search for winner on columns
-                       {
+                       { 
                         coordonate=h;
                         line="column";
                         return table[0][h];
