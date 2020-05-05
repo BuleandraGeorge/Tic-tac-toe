@@ -9,9 +9,25 @@
 
 #score-board{
     background-color:rgb(255, 222, 37);
-    padding:1vh 0;
     color:rgb(238, 58, 13);
     box-shadow: inset 0 0 5px 1px rgb(238, 58, 13);
+    font-size: 15px;
+    padding:5px;
+}
+div #reset-table{
+margin:-27px 4px 3px 0px;
+font-size: 10px;
+
+}
+div #reset-scores{
+ margin:0;
+ font-size: 10px;
+}
+#p2{
+    margin-top:-24px;
+}
+#reset-table,#reset-scores,#p1,#p2{
+border-color: rgb(238, 58, 13);
 }
 #Name-HBB h1{
     width:300px;
@@ -68,4 +84,15 @@ ul li{
 }
 #close:hover{
     text-shadow: 0 0 10px rgb(238, 58, 13);
+}
+#info-modal{
+    background-color:rgb(255, 222, 37);
+}
+@media (min-width:1020px){
+    div #reset-table,div #reset-scores{
+        margin-right:40px;
+    }
+    #p1,#p2{
+        margin-left:40px;
+    }
 }

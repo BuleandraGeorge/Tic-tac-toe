@@ -13,15 +13,17 @@ body{
 }
 #reset-table{
     align-self: flex-end;
-    margin-top: -25px;
-    margin-bottom: 25px;
+    margin:-32px 3px 10px 0px;
+    border-style: outset;
 }
 #reset-scores{
     align-self: flex-end;
-    margin-bottom: -25px;
+    margin:0px 3px -28px 0px;
+    border-style: outset;
 }
 #p1,#p2{
-    width:200px;
+    width:250px;
+    border-style: outset;
 }
 /*-------------Table Settings----------*/
 #table{
@@ -46,7 +48,6 @@ body{
 header{
    display:flex;
    flex-direction: column;
-   margin-top:-30px;
 }
 #Name-HBB h1{
     text-align: center;
@@ -54,14 +55,17 @@ header{
     margin: 15px auto;
 }
 #theme-name{
-    margin:-30px auto 50px auto;
+    margin:-30px auto 10px auto;
 }
 /*---------------SCORE BOARD------------------*/
 #p2,#p1{
     margin:3px 0px;
 }
-.player2-view{
+/* In the near future i want to add a 2 side view on mobile phone. 
+Every player to hold the by sides and the score board will be displayed 
+for each side*/
 -webkit-transform:rotate(-180deg);
+.player2-view{ 
 -moz-transform:rotate(-180deg);
 -o-transform:rotate(-180deg);
 transform:rotate(-180deg);
@@ -215,9 +219,6 @@ nav{
     display: flex;
     justify-content: flex-end;
 }
-#info-modal{
-    display: none;
-}
 #info,#close{
 padding: 0.5em;
 }
@@ -225,17 +226,41 @@ padding: 0.5em;
     display: none;
 }
 #info-modal{
-    display:none;
     position: absolute;
-    z-index: +2;
-    background-color: inherit;
-    width: 60%;
+    z-index: +3;
+    width: 70%;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
-    transform: translate(27%, 50%);
-    box-shadow: 0 0 10px black;
+    top:17%;
+    left:12%;
+    box-shadow: 0 0 10px black; 
 }
-#info:hover #info-modal{
+#info:hover ~ #info-modal{
     display: initial;
+}
+@media (min-width:1024px){
+    #table{
+        top:60%;
+        left:50%;
+        transform: translate(-48%,-60%);
+        width:50vw;
+        height: 45vh;
+    }
+    #landing-modal{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        height:90vh;
+        width:50vw;
+        border-radius: 5px;
+        text-align: center;
+        
+    }
+    #info-modal{
+    top:20%;
+    left:13%;
+    display: none;
+    }
 }

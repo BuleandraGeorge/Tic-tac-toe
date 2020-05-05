@@ -41,6 +41,18 @@
 #info:hover{
     text-shadow: 0 0 10px black;
 }
+
 #close:hover{
     text-shadow: 0 0 10px black;
+}
+#info-modal{
+    background-color: white;
+}
+@media (min-width:1020px){
+    div #reset-table,div #reset-scores{
+        margin-right:40px;
+    }
+    #p1,#p2{
+        margin-left:40px;
+    }
 }
