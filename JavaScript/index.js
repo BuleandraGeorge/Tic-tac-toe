@@ -107,6 +107,7 @@ landingModal.addEventListener("click",function(landingModalEvent){
                    computerStatus=false;
                    break;
         case 'pvpc':document.getElementById("landing-modal-overlay").style.display="none";
+                    document.getElementById('player2').innerHTML="Computer";
                     computerStatus=true;
                     resetGame();
                     break;

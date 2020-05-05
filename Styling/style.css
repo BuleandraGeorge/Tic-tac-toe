@@ -64,7 +64,6 @@ header{
 /* In the near future i want to add a 2 side view on mobile phone. 
 Every player to hold the by sides and the score board will be displayed 
 for each side*/
--webkit-transform:rotate(-180deg);
 .player2-view{ 
 -moz-transform:rotate(-180deg);
 -o-transform:rotate(-180deg);
@@ -72,6 +71,7 @@ transform:rotate(-180deg);
 ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
 filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2); 
 text-align: center;
+-webkit-transform:rotate(-180deg);
 display:none;
 }
 /*-------Button Settings----------*/
