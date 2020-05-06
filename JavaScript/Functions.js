@@ -1,4 +1,4 @@
-export{computer,gsStatus,WON,resetGame,resetTable,computerTurn,gameStatus,currentPlayer};
+export{toggleInfo,computer,gsStatus,WON,resetGame,resetTable,computerTurn,gameStatus,currentPlayer};
 import {table} from './index.js';
 let p2=0;
 let p1=0;
@@ -244,3 +244,12 @@ function resetTable()
                 }
         }
 };
+function toggleInfo(x)
+{
+    if (x.style.display=='none')
+        {
+            x.style.display='initial';
+        }else {
+            x.style.display='none'
+        }
+}

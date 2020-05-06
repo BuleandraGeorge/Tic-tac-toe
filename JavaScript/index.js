@@ -1,4 +1,4 @@
-import {computer,gsStatus,WON,resetGame,resetTable,computerTurn,gameStatus,currentPlayer} from './Functions.js';
+import {computer,gsStatus,WON,resetGame,resetTable,computerTurn,gameStatus,currentPlayer, toggleInfo} from './Functions.js';
 export {table};
 let table=[[null,null,null],[null,null,null],[null,null,null]];
 let computerStatus=false;
@@ -114,6 +114,8 @@ landingModal.addEventListener("click",function(landingModalEvent){
         case 'online': alert("Comming Soon");
                     break;
         case 'close': document.getElementById("landing-modal-overlay").style.display="none";
+        case 'info': let x=document.getElementById("info-modal");
+                    toggleInfo(x);
         default:break;
     }
 });
