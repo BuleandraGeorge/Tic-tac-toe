@@ -62,5 +62,6 @@ To see the code you just have to click on the files.<br>
 <a href='https://i.pinimg.com/originals/83/17/83/831783ba0ce34bd5aea083a2bfa63233.jpg'>Background of ancient theme</a></p>
 <h2>Acknowledgements<h2>
 <p>To create a Player vs Computer mode I was inspired by my mentor Guido Cecilio; he recommended me 2 links where to find more
-informations about minmax algorithm and how to implement it:<br><a href='https://www.youtube.com/watch?v=l-hh51ncgDI'>Algorithms Explained – minimax and alpha-beta pruning</a> and <a href=https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-1-introduction/;>Minimax Algorithm in Game Theory | Set 1 (Introduction)</a>
+informations about minmax algorithm and how to implement it:<br><a href='https://www.youtube.com/watch?v=l-hh51ncgDI'>Algorithms Explained – minimax and alpha-beta pruning</a> and <a href=https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-1-introduction/;>Minimax Algorithm in Game Theory | Set 1 (Introduction)</a>.<br>
+Also <a src="https://www.w3schools.com/default.asp">w3schools.com</a> and <a src="https://css-tricks.com/">css-tricks.com</a> for tehnical informations.
 </p>
