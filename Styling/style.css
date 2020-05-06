@@ -228,15 +228,23 @@ padding: 0.5em;
 #info-modal{
     position: absolute;
     top:19%;
-    left:7.5%;
+    left:5%;
     z-index: +2;
     width: 80%;
     height: 70vh;
-    border: 1px solid black;
     border-radius: 5px;
-    padding: 10px;
+    padding: 5%;
     box-shadow: 0 0 10px black;
     
+}
+.inner-text-info-modal{
+    position: absolute;
+    overflow: auto;
+    height:90%;
+    width:90%;
+    top:0;
+    left:0;
+    padding:5%;
 }
 @media (min-width:1024px){
     #table{
@@ -258,16 +266,23 @@ padding: 0.5em;
         
     }
     #info-modal{
-    
+        height: 60%;
+        left:6%;
+        top:22%;
+        padding:5%;
     }
-}
-.inner-text-info-modal{
-    position: absolute;
-    overflow: auto;
-    height: 90%;
-    width: 90%;
-    top:0;
-    left:0;
-    padding: 10px;
-    margin:1px;
+    .inner-text-info-modal{
+        width:90%;
+        height: 80%;
+        padding:4%;
+        overflow: auto;
+        
+    } 
+    .inner-text-info-modal::-webkit-scrollbar{
+        width:2px;
+    }
+    .inner-text-info-modal::-webkit-scrollbar-thumb{
+        background-color: black;
+        border-radius:5px;
+    }
 }
